@@ -50,7 +50,7 @@ class astrbot_plugin_weather_wttr_in(Star):
         '''获取天气信息。
 
         Args:
-            location(string): 地点（地点为英文名，eg. Beijing，可以为''）
+            location(string): 地点（地点为英文名，eg. Beijing，若用户未声明地点或要查询当前地点的天气则为''）
         '''
         resp = "current weather(condition,temperature,wind,location):" + str(Get_Weather(location))
         return resp
