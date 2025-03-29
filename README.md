@@ -1,0 +1,1 @@
+# astrbot_plugin_weather_wttr_in
