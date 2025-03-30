@@ -1,10 +1,10 @@
-﻿from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
+from astrbot.api.event import filter, AstrMessageEvent, MessageEventResult
 from astrbot.api.star import Context, Star, register
 from astrbot.api.all import *
 from typing import Optional
-import requests
+import aiohttp
 
-def Get_Weather(location: Optional[str] = None) -> str:
+async def Get_Weather(location: Optional[str] = None) -> str:
     """获取指定位置的天气状况（如：晴、雨等）
     
     Args:
@@ -24,19 +24,20 @@ def Get_Weather(location: Optional[str] = None) -> str:
 
     # 设置查询参数
     params = {
-        "format": "%C+%t+%w+%l"  #天气，实际温度，风，地点
+        "format": "%C+%t+%w+%l"  # 天气，实际温度，风，地点
     }
 
     try:
-        # 发送 GET 请求
-        response = requests.get(url, params=params)
-        response.raise_for_status()  # 如果状态码不是 200，抛出异常
+        # 使用 aiohttp 发送异步 GET 请求
+        async with aiohttp.ClientSession() as session:
+            async with session.get(url, params=params) as response:
+                response.raise_for_status()  # 如果状态码不是 200，抛出异常
 
-        weather_condition = response.text.strip()
-        print(f"当前天气状况: {weather_condition}")
-        return weather_condition
+                weather_condition = (await response.text()).strip()
+                print(f"当前天气状况: {weather_condition}")
+                return weather_condition
 
-    except requests.exceptions.RequestException as e:
+    except aiohttp.ClientError as e:
         print(f"请求失败: {e}")
         return ""
 
@@ -52,5 +53,5 @@ class astrbot_plugin_weather_wttr_in(Star):
         Args:
             location(string): 地点（地点为英文名，eg. Beijing，若用户未声明地点或要查询当前地点的天气则为''）
         '''
-        resp = "current weather(condition,temperature,wind,location):" + str(Get_Weather(location))
+        resp = "current weather(condition,temperature,wind,location):" + str(await Get_Weather(location))
         return resp
