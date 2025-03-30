@@ -1,1 +1,6 @@
-
+name: astrbot_plugin_weather_wttr_in
+desc: 使用wttr.in获取天气的llm工具 
+help: 使用时要提示llm使用function_call，详情见repo
+version: v1.0.1
+author: xiewoc 
+repo: https://github.com/xiewoc/astrbot_plugin_weather_wttr_in
