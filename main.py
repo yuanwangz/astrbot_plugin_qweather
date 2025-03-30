@@ -41,7 +41,7 @@ async def Get_Weather(location: Optional[str] = None) -> str:
         print(f"请求失败: {e}")
         return ""
 
-@register("astrbot_plugin_weather_wttr_in", "xiewoc", "使用wttr.in查询天气的llm工具", "1.0.0", "https://github.com/xiewoc/astrbot_plugin_weather_wttr_in")
+@register("astrbot_plugin_weather_wttr_in", "xiewoc", "使用wttr.in查询天气的llm工具", "1.0.1", "https://github.com/xiewoc/astrbot_plugin_weather_wttr_in")
 class astrbot_plugin_weather_wttr_in(Star):
     def __init__(self, context: Context):
         super().__init__(context)
