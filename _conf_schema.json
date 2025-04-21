@@ -1,0 +1,8 @@
+{
+    "weather_api_key": {
+      "type": "string",
+      "description": "和风天气apikey",
+      "hint": "和风天气apikey,申请链接： https://dev.qweather.com/",
+      "default": ""
+    }
+}
