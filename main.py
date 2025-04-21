@@ -95,10 +95,10 @@ class astrbot_plugin_weather_wttr_in(Star):
     
     @llm_tool(name="get_weather") 
     async def get_weather(self, event: AstrMessageEvent, location: Optional[str] = None) -> MessageEventResult:
-        '''获取天气信息。
+        '''天气查询工具，获取指定地点的实时及未来3天天气信息。
 
         Args:
-            location(string): 地点（仅支持文字，如：北京）
+            location(string): 地点（仅支持中文，如：北京）
         '''
         if not self.weather_api_key:
             return "current weather(condition,temperature,wind,location): 天气查询工具暂不可用。"
